@@ -10,10 +10,9 @@ namespace ZooBusinessLogic.ViewModels
 		public int Id { get; set; }
 		public int? ExcursionId { get; set; }
 		public int RouteId { get; set; }
+		[DisplayName("Название")]
 		public string RouteName { get; set; }
 		public DateTime StartRoute { get; set; }
-		[DisplayName("Количество")]
-		public int Count { get; set; }
 		[DisplayName("Цена")]
 		public int Cost { get; set; }
 	}

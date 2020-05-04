@@ -11,7 +11,6 @@ namespace ZooBusinessLogic.BindingModels
 		public int RouteId { get; set; }
 		public string RouteName { get; set; }
 		public DateTime StartRoute { get; set; }
-		public int Count { get; set; }
 		public int Cost { get; set; }
 	}
 }
