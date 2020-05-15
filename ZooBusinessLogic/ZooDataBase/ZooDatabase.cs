@@ -1,5 +1,6 @@
 ﻿using System;
 using ZooDataBase.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ZooDataBase
 {
