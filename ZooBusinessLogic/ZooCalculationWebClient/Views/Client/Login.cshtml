@@ -1,0 +1,25 @@
+﻿@model ZooCalculationWebClient.Models.SignIn
+
+@{
+    ViewData["Title"] = "Авторизация";
+}
+<head>
+    <title>Авторизация</title>
+</head>
+<body>
+    <form asp-action="Login">
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" asp-for="Login" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" asp-for="Password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Вход</button>
+    </form>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

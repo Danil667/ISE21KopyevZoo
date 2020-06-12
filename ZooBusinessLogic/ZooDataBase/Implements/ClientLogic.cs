@@ -16,10 +16,6 @@ namespace ZooDataBase.Implements
             using (var context = new ZooDatabase())
             {
                 Client elem = context.Clients.FirstOrDefault(rec => rec.Login == model.Login && rec.Id != model.Id);
-                if (elem != null)
-                {
-                    throw new Exception("Уже есть клиент с таким логином");
-                }
                 if (model.Id.HasValue)
                 {
                     elem = context.Clients.FirstOrDefault(rec => rec.Id == model.Id);
