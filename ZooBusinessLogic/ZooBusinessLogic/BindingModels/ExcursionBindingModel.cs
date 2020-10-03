@@ -14,6 +14,8 @@ namespace ZooBusinessLogic.BindingModels
 		public string Name_Excursion { set; get; }
 		public decimal PaidSum { get; set; }
 		public decimal Remain { get; set; }
+		public DateTime? DateFrom { get; set; }
+		public DateTime? DateTo { get; set; }
 		public List<RouteForExcursionBindingModel> RouteForExcursions { get; set; }
 		public decimal Final_Cost { get; set; }
 	}

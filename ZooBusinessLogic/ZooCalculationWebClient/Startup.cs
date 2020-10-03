@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ZooBusinessLogic.BusinessLogic;
+using ZooBusinessLogic.Interfaces;
+using ZooDataBase.Implements;
 
 namespace ZooCalculationWebClient
 {
@@ -24,6 +27,11 @@ namespace ZooCalculationWebClient
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+			services.AddTransient<IClientLogic, ClientLogic>();
+			services.AddTransient<IOrderLogic, OrderLogic>();
+			services.AddTransient<IExcursionLogic, ExcursionLogic>();
+			services.AddTransient<IRouteLogic, RouteLogic>();
+			services.AddTransient<ReportLogic>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

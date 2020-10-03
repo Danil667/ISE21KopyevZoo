@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Маршруты";
+}
+
+<div class="text-center text-info">
+    <h1>Маршруты</h1>
+</div>
+<table class="table table-borderless">
+    <thead class="thead-dark">
+        <tr>
+            <th>Маршрут</th>
+            <th>Дата</th>
+            <th>Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var route in ViewBag.routes)
+        {
+        <tr>
+            <td>@route.RouteName</td>
+            <td>@route.StartRoute</td>
+            <td>@route.Cost</td>
+        </tr>
+        }
+    </tbody>
+</table>

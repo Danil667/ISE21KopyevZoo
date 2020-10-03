@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ReportModel
+@{
+    ViewData["Title"] = "Экскурсии";
+}
+<div class="text-center text-info">
+    <h1>Экскурсии</h1>
+</div>
+<hr />
+<p> <strong> <a class="btn btn-success" asp-area="" asp-controller="excursion" asp-action="CreateExcursion">Сформировать</a></strong></p>
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        Выберите даты для отображения отчета по путешествиям и оплатам
+    </p>
+    <p>
+        От: @Html.EditorFor(model => model.From)
+    </p>
+    <p>
+        До: @Html.EditorFor(model => model.To)
+    </p>
+    <p>
+        @Html.EditorFor(model => model.SendMail) Отправить отчёт по путешествиям и оплатам на почту
+    </p>
+    <p>
+        <button type="submit" class="btn btn-success btn-sm">Получить</button>
+    </p>}
+<hr />
+@foreach (var excursion in ViewBag.Excursions)
+{
+    <p><strong>Номер: @excursion.Id </strong></p>
+    <p>Дата покупки: @excursion.ExcursionCreate</p>
+    <p>Статус: @excursion.Status</p>
+    <p>Цена: @excursion.Cost</p>
+    <p>Маршрут:</p>
+    <table class="table">
+        <tr>
+            <td>Маршрут</td>
+            <td>Дата</td>
+            <td>Цена</td>
+        </tr>
+        @foreach (var route in excursion.RouteForExcursions)
+        {
+            <tr>
+                <td>@route.RouteName</td>
+                <td>@route.StartRoute</td>
+                <td>@route.Cost</td>
+            </tr>
+        }
+    </table>
+    if (excursion.Status != ZooBusinessLogic.Enums.ExcursionStatus.Принят && ViewBag.Order != null)
+    {
+        <p>Платежи:</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pay in ViewBag.Order)
+                {
+                    if (pay.ExcursionId == excursion.Id)
+                    {
+                        <tr>
+                            <td>@pay.DateCreate</td>
+                            <td>@pay.Sum</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    <hr />
+    if (excursion.Status == ZooBusinessLogic.Enums.ExcursionStatus.Заказ_оплачен)
+    {
+        <p>Полностью оплачено</p>
+        <hr />
+    }
+    else
+    {
+        if (excursion.Status == ZooBusinessLogic.Enums.ExcursionStatus.В_Рассрочке)
+        {
+            <p>К оплате: @excursion.Remain</p>
+            <hr />
+
+        }
+        <p>
+            <a href="/Excursion/Order/@excursion.Id">Оплатить</a>
+        </p>
+    }
+    <p>
+        <a href="/Excursion/SendWordReport/@excursion.Id">Отправить список маршрутов в формате .docx</a>
+    </p>
+    <p>
+        <a href="/Excursion/SendExcelReport/@excursion.Id">Отправить список маршрутов в формате .xslx</a>
+    </p>
+    <hr />
+
+}

@@ -15,7 +15,7 @@ namespace ZooDataBase.Implements
         {
             using (var context = new ZooDatabase())
             {
-                Client elem = context.Clients.FirstOrDefault(rec => rec.Login == model.Login && rec.Id != model.Id);
+                Client elem = context.Clients.FirstOrDefault(rec => rec.Id == model.Id);
                 if (model.Id.HasValue)
                 {
                     elem = context.Clients.FirstOrDefault(rec => rec.Id == model.Id);
@@ -32,6 +32,7 @@ namespace ZooDataBase.Implements
                 elem.Login = model.Login;
                 elem.ClientFIO = model.ClientFIO;
                 elem.Password = model.Password;
+                elem.BlockStatus = model.BlockStatus;
                 context.SaveChanges();
             }
         }
@@ -60,7 +61,7 @@ namespace ZooDataBase.Implements
                 .Where(
                     rec => model == null
                     || rec.Id == model.Id
-                    || rec.Login == model.Login && rec.Password == model.Password
+                    || rec.Login == model.Login && (model.Password == null || rec.Password == model.Password)
                 )
                 .Select(rec => new ClientViewModel
                 {

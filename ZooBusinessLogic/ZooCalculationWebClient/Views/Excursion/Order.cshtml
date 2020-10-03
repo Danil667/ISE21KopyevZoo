@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model OrderModel
+<div class="text-left text-info">
+    <h1>Оплатить экскурсию №@ViewBag.Excursion.Id</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <p>Остаток: @ViewBag.Remain</p>
+    <p>Сумма: <input type="number" min="1" max="@ViewBag.Remain" name="Model.OrderSum" /></p>
+    <input type="hidden" name="Model.ExcursionId" value="@((int)ViewBag.Excursion.Id)" />
+    <button type="submit" class="btn btn-success btn-sm">Оплатить</button>
+}

@@ -1,0 +1,35 @@
+﻿@model ZooCalculationWebClient.Models.CreateExcursion
+
+@{
+    ViewData["Title"] = "Создать экскурсию";
+}
+
+<div class="text-center text-info">
+    <h1>@ViewData["Title"]</h1>
+</div>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @style = "color: black" })
+    <p>Маршруты:</p>
+    <table class="table table-borderless">
+        <thead class="thead-dark">
+            <tr>
+                <th><justify>Маршрут</justify></th>
+                <th>Дата начала маршрута</th>
+                <th>Выбор маршрута</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        @foreach (ZooBusinessLogic.ViewModels.RouteViewModel course in ViewBag.RouteForExcursions)
+        {
+            <tr>
+                <td><justify>@course.RouteName</justify></td>
+                <td>@course.StartRoute</td>
+                <td><input type="number" name="Model.RouteForExcursions[@course.Id]" value="0" min="0" /></td>
+                <td>@course.Cost</td>
+            </tr>
+        }
+    </table>
+    <button type="submit" class="btn btn-success btn-sm">Создать</button>
+}

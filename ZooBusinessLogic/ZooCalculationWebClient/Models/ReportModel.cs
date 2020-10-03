@@ -7,8 +7,8 @@ namespace ZooCalculationWebClient.Models
 {
     public class ReportModel
     {
-        public int From { get; set; }
-        public int To { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
         public bool SendMail { get; set; }
     }
 }

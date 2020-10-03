@@ -98,7 +98,7 @@ namespace ZooDataBase.Implements
                     ClientFIO = rec.Client.ClientFIO,
                     ExcursionCreate = rec.ExcursionCreate,
                     Cost = rec.Final_Cost,
-                    PaidSum = context.Orders.Where(recP => recP.ExcursionId == recP.Id).Select(recP => recP.Sum).Sum(),
+                    Remain = rec.Final_Cost-context.Orders.Where(recP => recP.ExcursionId == recP.Id).Select(recP => recP.Sum).Sum(),
                     Status = rec.Status,
                     RouteForExcursions = GetExRouteViewModel(rec)
                 })
